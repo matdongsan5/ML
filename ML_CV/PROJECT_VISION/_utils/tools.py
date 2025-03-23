@@ -134,7 +134,13 @@ def RobustScaler_dataframe(df):
 
 
 def train_test_cut(feature_df, target_sr, TestSize=0.25, RandomState=5, stratify=None):
-    X_train, y_train, X_test, y_test = train_test_split(feature_df,
+    """ 
+    Return:
+    X_train, X_test, y_train, y_test
+    
+    
+    """
+    X_train, X_test, y_train, y_test = train_test_split(feature_df,
                                                         target_sr,
                                                         test_size=TestSize,
                                                         random_state=RandomState,
@@ -142,7 +148,7 @@ def train_test_cut(feature_df, target_sr, TestSize=0.25, RandomState=5, stratify
     
     print(f"X_train => {X_train.ndim}D {X_train.shape} / X_test => {X_test.ndim}D, {X_test.shape}")
     print(f"y_train => {y_train.ndim}D {y_train.shape}, / y_test => {y_test.ndim}D, {y_test.shape}")
-    return X_train, y_train, X_test, y_test
+    return X_train, X_test, y_train, y_test
     
 
 def polyFeature(X_train, y_train, X_test, y_test, deGree=2, interactionTF = False, include_biasTF = True):
