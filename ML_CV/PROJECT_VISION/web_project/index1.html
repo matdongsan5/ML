@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>이미지 업로드 및 예측</title>
+    <style>
+        #image-container {
+            margin-top: 20px;
+        }
+        .uploaded-image {
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>이미지 업로드 및 예측</h2>
+    <form id="image-form" enctype="multipart/form-data">
+        <input type="file" id="image-input" name="image" accept="image/*">
+        <button type="button" onclick="uploadImage()">업로드</button>
+    </form>
+
+    <div id="image-container"></div>
+    <h3 id="prediction-result"></h3>
+
+    <script>
+        // 이미지를 업로드하고 예측 결과를 출력하는 함수
+        function uploadImage() {
+            const imageInput = document.getElementById('image-input');
+            const imageContainer = document.getElementById('image-container');
+            const predictionResult = document.getElementById('prediction-result');
+            
+            const formData = new FormData();
+            formData.append("image", imageInput.files[0]);
+
+            fetch('/cgi-bin/predict.py', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // 예측 결과 출력
+                predictionResult.textContent = "예측 결과: " + data.prediction;
+
+                // 이미지 미리보기 출력
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgDiv = document.createElement('div');
+                    imgDiv.classList.add('uploaded-image');
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.width = 150;
+                    imgDiv.appendChild(img);
+                    imageContainer.appendChild(imgDiv);
+                };
+                reader.readAsDataURL(imageInput.files[0]);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
