@@ -164,34 +164,38 @@ def handle_upload():
     return upload_message, file_path, pre_
 
 def pre_Img(filename):
+    
     if filename =="":
      return ""
-    model = joblib.load('./_model/rf_model.pkl')
+    model = joblib.load('./_model/rf_model_sbs.joblib')
     
     if ('./upload/'+filename).endswith('png'):
         pillow_image = Image.open('./upload/'+filename)
         numpy_image = np.array(pillow_image)
         examImg = cv2.cvtColor(numpy_image, cv2.COLOR_BGRA2RGB)
-        a = cv2.cvtColor(examImg, cv2.COLOR_BGR2RGB)
+        a = examImg
+        # a = cv2.cvtColor(examImg, cv2.COLOR_BGR2RGB)
         # a = cv2.imread('../upload/'+filename, cv2.IMREAD_UNCHANGED)
         # a = cv2.cvtColor(a, cv2.COLOR_BGRA2BGR) 
         
     else:    
         a = cv2.imread('./upload/'+filename, cv2.IMREAD_COLOR)
-    b = resize_image(a, 100, 100)
+        a = cv2.cvtColor(numpy_image, cv2.COLOR_BGRA2RGB)
+    b = resize_image(a, 70, 70)
     c = b.flatten()
-    resultDF = pd.DataFrame(columns=list(range(0,30000)))
+    resultDF = pd.DataFrame(columns=list(range(1,14701)))
     resultDF.loc['0'] = c
     resultDF.columns.astype(str)
-    pre_ = model.predict(resultDF/255)
-    # pre_ = f"{e:04d}01.png"
-    return pre_
+    pre_ = model.predict(resultDF/255.)
+    # pre_ = model.predict(resultDF)
+    # pre_ = f"{c:04d}01.png"
+    return pre_ 
 
 # # 업로드 처리
 upload_message, file_path, pre_ = handle_upload()
 # pre_path = '../origin/'+f"{pre_[0]:04d}01.png"
 if pre_:
-    pre_path = '../origin/'+f"0{pre_[0]:05d}.png"
+    pre_path = '../origin/'+f"0{pre_[0]:03d}01.png"
 else: 
     pre_path = ""
 # 이미지 표시 HTML
@@ -210,40 +214,68 @@ print(f"""
     <meta charset="utf-8">
     <title>이미지 업로드</title>
     <style>
-        body {{ font-family: Arial, sans-serif; margin: 20px; }}
-        .upload-form {{ margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }}
-        .message {{ padding: 10px; margin: 10px 0; border-radius: 5px; }}
+        body {{ font-family: Arial, sans-serif; margin: 20px; 
+               display: gird;
+            justify-content: center;  /* 가로 중앙 정렬 */
+            align-items: center;
+             width: 800px;
+             margin-left:430px;
+               }}
+        h1 {{ p align: center; }}       
+        
+        .upload-form {{ border: 1px solid #ddd; border-radius: 5px; 
+                        justify-content: center;
+                        padding: 10px; 
+                        margin-left: 10px;
+                        margin-top: 10px;
+                        width: 100%;
+        
+        }}
+        .message {{ position: relative; 
+                    justify-content: center;
+                    width: 100%; 
+                    padding: 10px; 
+                    margin-left: 10px;
+                    margin-top: 10px;
+                    border-radius: 5px; }}
         .success {{ background-color: #d4edda; color: #155724; }}
-        .container{{ 
+        .container{{ display: flex;
+                    
+                    justify-content: center;
                     width: 100%;
                     }}
                     
         .subcontainer{{ display: flex;
+                        
+                    position: relative; 
                     width: 45%;
                     }}
         
         
         .image-container1 {{
+                            align='center';
+                            font-size:25px;
                             position: relative; 
-                            z-index: 2; 
-                            width: 45%; 
-                            margin-top: 20px; 
-                            
-                            border: 1px solid #eee; 
-                            padding: 10px; }}
+                            width: 100%; 
+                            margin-top: 20px;
+                            margin-right:30px;
+                            border: 5px solid #FFD700; 
+                            ; }}
         .image-container2 {{ 
+                            align='center';
+                            font-size:25px;
                             position: relative; 
-                            z-index: 1;
-                            width: 30%; 
+                            width: 100%; 
                             margin-top: 20px; 
+                            margin-left:30px;
                             
-                            border: 1px solid #eee; 
-                            padding: 10px; }}
+                            border: 5px solid #006400; 
+                            ; }}
                             
     </style>
 </head>
 <body>
-    <h1>띠부띠부 씰 분류</h1>
+    <h1 p align='center'>띠부띠부 씰 분류</h1>
     
     <div class="upload-form">
         <form action="./predict.py" method="post" enctype="multipart/form-data">
@@ -258,12 +290,15 @@ print(f"""
     <div class='container'>
         <div class = 'sub_container'>
             <div class="image-container1">
+             <p p align='center'> 띠부띠부씰 번호 &nbsp[&nbsp{file_path[-9:-6]}.{file_path[-6:-3]}&nbsp] </p>
+            </div>
+            <div class="image-container1">
                 {img_html}
             </div>
         </div>
         <div class = 'sub_container'>
             <div class="image-container2">
-                {pre_}{pre_html}
+              <p p align='center'> 예상 도감번호 &nbsp[&nbsp{pre_[0]}&nbsp]  </p>  
             </div>
             <div class="image-container2">
                 {pre_html}
