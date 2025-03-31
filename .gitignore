@@ -2,3 +2,6 @@ ML_CV/D0321/model/rf_model.joblib
 ML_CV/D0321/model/dt_model.joblib
 
 ML_CV/D0321/model/
+
+DL/_data/
+DL/_image/
