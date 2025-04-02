@@ -1,6 +1,6 @@
 import sys
 
-sys.append('../_utils/')
+sys.path.append('../_utils/')
 
 import tools as ts
 import ~~
