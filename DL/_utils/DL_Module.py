@@ -106,9 +106,11 @@ class TT_classifier():
             self.BATCH_SIZE = batch_size
             self.ITERATION = int(len(trainDS)/batch_size)
             self.DEVICE = device if device else ('cuda' if torch.cuda.is_available() else 'cpu')
-
-            self.LR = lr
+            
             self.MODEL = model
+            self.MODEL.to(self.DEVICE)
+            self.LR = lr
+            
             self.OPTIMIZER = optim.Adam(self.MODEL.parameters(), lr=self.LR)
             self.LOSS_FN = LOSS_FN
             print(f"EPOCHS : {self.EPOCHS}")
@@ -116,7 +118,7 @@ class TT_classifier():
             print(f"LOSS_FN : {self.LOSS_FN}")
             
             
-            self.HIST ={'Train':[[],[]], 'Valid':[[],[]]}
+            self.HIST ={'Train':[], 'Valid':[]}
             
             
             
@@ -134,13 +136,13 @@ class TT_classifier():
 
             # 학습 진행
             pre_y = self.MODEL(feature)
-            target = target.float()
+            target = torch.Tensor(target).long()
             # 손실 계산
-            loss = self.LOSS_FN(pre_y, target.reshape(-1,1))
+            loss = self.LOSS_FN(pre_y, target.reshape(-1))
 
             # 정확도 계산
-            accuracy = BinaryAccuracy()
-            acc = accuracy(pre_y, target.reshape(-1,1))
+            accuracy = MulticlassAccuracy(num_classes=10)
+            acc = accuracy(pre_y, target.reshape(-1))
 
             # 역전파 진행
             loss.backward()
@@ -174,13 +176,13 @@ class TT_classifier():
             print(x.shape)
             print(y.shape)
             pre_y= self.MODEL(x)
-            y = y.float()
+            y = torch.Tensor(y).long()
             # 손실 계산
-            loss = self.LOSS_FN(pre_y, y.reshape(-1,1))
+            loss = self.LOSS_FN(pre_y, y.reshape(-1))
 
             # 정확도 계산
-            accuracy = BinaryAccuracy()
-            acc = accuracy(pre_y, y.reshape(-1,1))
+            accuracy = MulticlassAccuracy(num_classes=10)
+            acc = accuracy(pre_y, y.reshape(-1))
 
             return loss.item(), acc.item()
     
@@ -200,11 +202,9 @@ class TT_classifier():
             trainLoss, trainAcc = self.training()
             validLoss, validAcc = self.evaluate()
 
-            self.HIST['Train'][0].append(trainLoss)
-            self.HIST['Train'][1].append( trainAcc)
-
-            self.HIST['Valid'][0].append(validLoss)
-            self.HIST['Valid'][1].append(validAcc)
+            self.HIST['Train'].append((trainLoss, trainAcc))
+            self.HIST['Valid'].append((validLoss, validAcc))
+            
 
             print(f'\nEPOCH[{epoch}/{self.EPOCHS}]----------------')
             print(f'- TRAIN_LOSS {trainLoss:.5f}  ACC {trainAcc:.5f}')
