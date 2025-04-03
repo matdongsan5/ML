@@ -192,7 +192,7 @@ class TT_classifier():
         lrScheduler = ReduceLROnPlateau(self.OPTIMIZER, patience=patience, mode=mode)
 
         #조기 종료 카운팅 ==> 모델 성능 개선없이 불필요한 학습 막기 위해서.
-        E_STOP_CNT = 10
+        E_STOP_CNT = 5
 
         # 에포크 단위 학습/검증 진행 
         for epoch in range(self.EPOCHS):
@@ -211,7 +211,7 @@ class TT_classifier():
             print(f'- VALID_LOSS {validLoss:.5f}  ACC {validAcc:.5f}')
 
             lrScheduler.step(validLoss)
-            print(time.time()-a)
+            print(f"{time.time()-a:.2f}초")
             
             ## num_bad_epochs
             ## 성능개선이 안될 시. 카운트.
