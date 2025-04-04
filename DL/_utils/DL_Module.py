@@ -136,13 +136,14 @@ class TT_classifier():
 
             # 학습 진행
             pre_y = self.MODEL(feature)
-            target = torch.Tensor(target).long()
+            # target = torch.Tensor(target).long()
             # 손실 계산
-            loss = self.LOSS_FN(pre_y, target.reshape(-1))
+            loss = self.LOSS_FN(pre_y, target.reshape(-1,1).float())
 
             # 정확도 계산
-            accuracy = MulticlassAccuracy(num_classes=10)
-            acc = accuracy(pre_y, target.reshape(-1))
+            # accuracy = MulticlassAccuracy(num_classes=10)
+            accuracy = BinaryAccuracy()
+            acc = accuracy(pre_y, target.reshape(-1,1))
 
             # 역전파 진행
             loss.backward()
@@ -176,13 +177,13 @@ class TT_classifier():
             print(x.shape)
             print(y.shape)
             pre_y= self.MODEL(x)
-            y = torch.Tensor(y).long()
+            # y = torch.Tensor(y).long()
             # 손실 계산
-            loss = self.LOSS_FN(pre_y, y.reshape(-1))
+            loss = self.LOSS_FN(pre_y, y.reshape(-1,1).float())
 
             # 정확도 계산
-            accuracy = MulticlassAccuracy(num_classes=10)
-            acc = accuracy(pre_y, y.reshape(-1))
+            accuracy = BinaryAccuracy()
+            acc = accuracy(pre_y, y.reshape(-1,1))
 
             return loss.item(), acc.item()
     
@@ -209,7 +210,21 @@ class TT_classifier():
             print(f'\nEPOCH[{epoch}/{self.EPOCHS}]----------------')
             print(f'- TRAIN_LOSS {trainLoss:.5f}  ACC {trainAcc:.5f}')
             print(f'- VALID_LOSS {validLoss:.5f}  ACC {validAcc:.5f}')
+            
+            
+            ## 모델 저장부분
+            MODEL_PATH = './models/'
+            MODEL_FILE = 'catdog_model.pt'
 
+            MAX_ACC  = 0.8
+
+            #모델 저장 기준
+            if MAX_ACC < validAcc :
+                # torch.save(MODEL, MODEL_PATH+MODEL_FILE)
+                torch.save(self.MODEL, f'{MODEL_PATH}cd_model_epoch_{epoch:02d}')
+                MAX_ACC = validAcc
+                
+                
             lrScheduler.step(validLoss)
             print(f"{time.time()-a:.2f}초")
             
@@ -324,7 +339,7 @@ class TT_regressor():
             mae = MAE(pre_y, target.reshape(-1,1))
             R2 = R2Score()
             r2 = R2(pre_y, target.reshape(-1,1))
-
+    
             # 역전파 진행
             loss.backward()
 
@@ -402,6 +417,20 @@ class TT_regressor():
             print(f'\nEPOCH[{epoch}/{self.EPOCHS}]----------------')
             print(f'- TRAIN_LOSS {trainLoss:.5f}    Mse {trainMse:.5f}   MAE {trainMae:.5f}  R2{trainR2:.5f}')
             print(f'- VALID_LOSS {validLoss:.5f}    Mse {validMse:.5f}   MAE {validMae:.5f}  R2{validR2:.5f}')
+            
+            
+            ## 모델 저장부분
+            MODEL_PATH = './models/'
+            MODEL_FILE = 'catdog_model.pt'
+
+            MIN_VLOSS  = 100000.
+
+            #모델 저장 기준
+            if MIN_VLOSS > validLoss :
+                # torch.save(MODEL, MODEL_PATH+MODEL_FILE)
+                torch.save(self.MODEL, f'{MODEL_PATH}cd_model_epoch_{epoch:02d}')
+                MIN_VLOSS = validLoss
+          
             
             print(time.time()-a)
         
