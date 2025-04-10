@@ -1,12 +1,21 @@
-index.html
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>show</title>
+  <title>Real-Time Number</title>
 </head>
 <body>
-   
-    <img src="{{ url_for('static', filename=food_img) }}">
+  <h1>Real-time Random Number:</h1>
+  <p id="number">Click the button</p>
+  <button onclick="getNumber()">Get Number</button>
 
+  <script>
+    function getNumber() {
+      fetch('/get_number')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('number').textContent = data.number;
+        });
+    }
+  </script>
 </body>
 </html>
