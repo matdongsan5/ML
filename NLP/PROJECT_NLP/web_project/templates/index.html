@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Age?</title>
+    <style>
+      body {
+        display: flex;
+        align-items: top;
+        justify-content: center;
+        min-height: 50vh;
+        margin: 150;
+        font-family: Arial, sans-serif;
+        background-color:rgba(159, 159, 159, 0.18);
+      }
+      
+      
+
+      #main {
+        text-align: center;
+        background-color: white;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 0 20px rgba(106, 106, 106, 0.48);
+      }
+  
+      form {
+        margin-bottom: 10px;
+      }
+  
+      input[type="text"] {
+        padding: 10px;
+        width: 400px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        margin-right: 10px;
+      }
+  
+      input[type="submit"] {
+        padding: 10px 20px;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+  
+      input[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+  
+      img {
+        margin-top: 10px;
+        width: 500px;
+        border-radius: 12px;
+      }
+    </style>
+</head>
+<body>
+  <div id="main">
+    {% if prediction is not none %}
+      <div class="main-bg" style="background-image: url('{{ url_for('static', filename=prediction ~ '_02.jpg') }}');"></div>
+    {% endif %}
+    <h1>What Age?</h1>
+    <form method="POST">
+      <label for="text"></label>
+      <input type="text" id="text" name="text" required>
+      <input type="submit" value="예측">
+    </form>
+
+    {% if prediction is not none %}
+      <h2> {{ prediction }} 년대</h2>
+      <img src="{{ url_for('static', filename=prediction ~ '.jpg') }}" alt="{{ prediction }} 이미지"><br>
+      <img src="{{ url_for('static', filename=prediction ~ '_2.jpg') }}" alt="{{ prediction }} 이미지">
+    {% endif %}
+  </div>
+</body>
+</html>
