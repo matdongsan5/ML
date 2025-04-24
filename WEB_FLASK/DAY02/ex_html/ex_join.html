@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>***join***</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #main {
+            border: 1px solid blue;
+            display: inline-block;
+            width: 300px;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+        label {
+            display: inline-block;
+            width: 100px;
+
+        }
+        #submit {
+            width: 50px;
+            display: flex;
+            justify-self: flex-end;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="main">
+    <h1 align="center">회원가입</h1>
+    <form method="post" action="URL">
+        <label for="name">이름</label>
+        <input type="text" id="name" required>
+        <br>
+        <label for="id">아이디</label>
+        <input type="text" id="id" required>
+        <br>
+        <label for="pw">비밀번호</label>
+        <input type="password" id="pw" required>
+        <br>
+        <label for="email">E-mail</label>
+        <input type="text" id="email" required>
+        <br>
+        <label for="birth">생년월일</label>
+        <input type="date" id="birth" required>
+        <br>
+        
+        취미생활(모두 선택)<br>
+        <input type="checkbox" name="hobby" value="game">게임 
+        <input type="checkbox" name="hobby" value="">코딩
+        <input type="checkbox" name="hobby" value="">영화감상
+        <br> 
+        <br> 
+        관심분야(모두 선택)
+        <br> 
+        <input type="checkbox" name="attention" value="">딥러닝 
+        <input type="checkbox" name="attention" value="">분석
+        <input type="checkbox" name="attention" value="">기획
+        <input type="checkbox" name="attention" value="">기술영업
+        <br> <br> 
+        <!-- 클릭하면 입력 값들이 서버로 전송 -->
+        <input id="submit" type="submit" value="전송">
+    </form>
+</div>
+</body>
+</html>

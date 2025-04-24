@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[입력 폼 태그 ]</title>
+</head>
+<body>
+    <h3>입력 태그들</h3><hr>
+
+    <!-- 입력 값 서버 전송 역할 태그 form -->
+    <!-- 속성 method : 서버로 전송 방식 -->
+    <!--     action : 값들 전달받아 처리할 서버의 프로그램/URL 지정 --> 
+         <!-- required 필수 -->
+    <form method="post" action="URL">
+        <label for="id">아이디</label>
+        <input type="text" id="id" required>
+        <br>
+        <label for="pw">비밀번호</label>
+        <input type="password" id="pw" required>
+        <br>
+        <!-- 클릭하면 입력 값들이 서버로 전송 -->
+        <input type="submit" value="전송">
+    </form>
+    <br><br><br>
+</body>
+
+</html>

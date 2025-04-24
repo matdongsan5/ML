@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[입력 태그 - 1]</title>
+</head>
+<body>
+    <h3>입력 태그들</h3><hr>
+
+    <!-- 입력 필드 -->
+    <!-- 공통속성 --> 
+    <!--     placeholder='미입력시출력텍스트'-->
+    <!--     maxlength  ='최대 문자 개수'-->
+    <!--     size       ='입력 필드의 길이'-->  
+    <input><br>
+
+    <!-- 텍스트 입력 -->
+    <!-- 속성 type='text' -->
+    <input type="text" placeholder="텍스트 입력" maxlength="15" size="20">
+    <br>
+
+    <!-- 비밀번호 입력 -->
+    <!-- 속성 type='password' -->
+    <input type="password" placeholder="비밀번호 입력" maxlength="15" size="20">
+    <br>
+    
+    <!-- 숫자 입력 -->
+    <!-- 속성 type='password' -->
+    <input type="number" min="0" max="10" step="2">
+    <br>
+
+    <!-- 색상 입력 -->
+    <!-- 속성 type='color' -->
+    <input type="color" >
+    <br> 
+    
+    <!-- 버튼 입력 -->
+    <!-- 속성 type='button' -->
+    <input type="button" value="DOWN">
+    <br>  
+
+    <!-- 선택 입력 -->
+    <!-- 속성 type='radio' -->
+    <p>좋아하는 과목을 <b>하나만</b> 고르세요</p>
+    <input type="radio" name="subject">국어 
+    <input type="radio" name="subject">영어 
+    <input type="radio" name="subject">수학   
+    <br> 
+
+    <!-- 속성 type='checkbox' -->
+    <p>좋아하는 음식을 <b>모두</b> 고르세요</p>
+    <input type="checkbox" name="food">제육볶음 
+    <input type="checkbox" name="food">돈까스 
+    <input type="checkbox" name="food">떡볶이 
+
+
+    <!-- 입력과 함께 사용되는 태그 -->
+    <!-- label : 웹 이용자에게는 좀 더 직관적인 입력 요소 제공 목적 -->
+    <label>아이디 <input type="text"> </label>
+    <br>
+    <label for="pw">비밀번호</label>
+    <input id="pw" type="password">
+</body>
+
+</html>

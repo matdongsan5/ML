@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[입력 태그 - 2]</title>
+</head>
+<body>
+    <h3>입력 태그들</h3><hr>
+
+    <!-- 드롭다운 메뉴 태그 -->
+    <select>
+        <option>커피</option>
+        <option>콜라</option>
+        <option>쥬스</option>
+        <option>생수</option>
+    </select>
+    <br>
+    <br>
+
+    <!-- 속성 size     : 화면 표시 항목 개수 -->
+    <!-- 속성 multiple : 여러 개의 항목 함께 선택 --> 
+    <select size="3" multiple>
+        <option>커피</option>
+        <option>콜라</option>
+        <option>쥬스</option>
+        <option>생수</option>
+        <option>녹차</option>
+        <option>맥주</option>
+    </select>
+    <br>
+    <br>
+
+    <!-- 속성 selected : 화면에 표시될 때 기본으로 선택되어 있을 항목-->
+    <!-- 속성 value    : 항목을 선택했을 때 최종적으로 반영될 값을 지정 --> 
+    <select>
+        <option value="coffee">커피</option>
+        <option value="coke">콜라</option>
+        <option value="juice">쥬스</option>
+        <option value="water" selected>생수</option>
+        <option value="tea">녹차</option>
+        <option value="beer">맥주</option>
+      </select>
+    <br>
+    <br>
+
+    <!-- 여러 줄 텍스트 입력 textarea -->
+    <!-- 속성 cols  : 텍스트 영역의 가로 너비를 지정. 수치는 문자 개수 기준-->
+    <!-- 속성 rows  : 텍스트 영역의 세로 너비를 지정. --> 
+    <!-- 텍스트가 세로로 더 길어질 경우 텍스트 영역 내에 세로 스크롤이 생김-->
+    <textarea cols="10" rows="6"></textarea>
+
+    <!-- 여러 줄 텍스트 입력 progress -->
+    <!-- 속성 max    : 작업량 지정.  반드시 0보다 크고 유효한 부동소수점 숫자-->
+    <!-- 속성 value  : 화면에 표시할 진척도. max의 값보다 작거나 같아야 함--> 
+    <!-- 텍스트가 세로로 더 길어질 경우 텍스트 영역 내에 세로 스크롤이 생김-->
+    <p>작업 진행 중... 60%...</p>
+    <progress value="60" max="100"></progress>
+    <br>
+    <br>
+
+    <!-- 버튼을 만드는 또 다른 방법 <button> -->
+
+    <!-- value 속성에 콘텐츠 -->
+    <input type="button" value="PUSH">
+
+    <!-- 태그 사이에 콘텐츠 -->
+    <button>PUSH</button>
+
+</body>
+
+</html>
