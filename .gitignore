@@ -22,3 +22,7 @@ TL/PROJECT_TL/data
 pytorchf-main/
 
 DACON/_data
+DACON/PP/
+
+WEB_FLASK/data
+WEB_FLASK/_model
