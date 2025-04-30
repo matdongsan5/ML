@@ -16,7 +16,7 @@ def index():
 def userinfo():
     return redirect('/')
 
-@APP.route("/hello")
+@APP.route("/hello", endpoint = "hello_page")
 def hello():
     return hello
 

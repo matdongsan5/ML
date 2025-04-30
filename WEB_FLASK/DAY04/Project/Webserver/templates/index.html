@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBWEB</title>
+    <!-- url_for() : 매개변수 조합해서 url 형식 문자열 생성 후 반환 -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+</head>
+<body>
+    <h1>!!GooD Luck 2025!!</h1>
+    <img src="{{url_for('static',filename='images/cat.jpeg')}}" alt="Movie Poster" width="320" height="450">
+    <ul>
+        <!-- 기본 url http://127.0.0.1:5000 + /question/list -->
+         <!-- URL에 맵핑된 view함수가 실행 -->
+        <li><a href='/question/list'>질문리스트</a></li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의플라스크</title>
+</head>
+<body bgcolor="yellow">
+    <h1>MY WEB PAGE</h1>
+
+    <!-- 사용자 이름 입력 받아서 서버로 전송 -->
+    <!-- 속성 - 전송방식 methods: post -->
+    <!-- 속성 - 처리담당 action : URL, file -->
+    <!-- submit버튼 클릭 시 입력태그의 입력값을 가지고 -->
+    <!-- post방식으로 저장해서 action에 지정된 서버로 -->
+    <!-- 전달 -->
+    <form action="/login" method="post">
+        사용자명: <input type="text" name="username" required>
+        <input type="submit" value="로그인">
+    </form>    
+</body>
+</html>

@@ -24,5 +24,6 @@ pytorchf-main/
 DACON/_data/
 DACON/PP/
 
-WEB_FLASK/data
-WEB_FLASK/_model
+
+WEB_FLASK/PROJECT_WEB/data
+WEB_FLASK/PROJECT_WEB/_model

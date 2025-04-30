@@ -1,0 +1,22 @@
+<!-- 질문 목록 -->
+{% if question_list %}
+    <ul>
+    {% for question in question_list %}
+    <!-- 질문 상세보기 이동 -->
+        <li><a href="/detail/{{ question.id }}/">{{ question.subject }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>질문이 없습니다.</p>
+{% endif %}
+
+<br><br><hr width="20%" align="left">
+<b>질문등록</b><hr width="20%" align="left">
+
+<!-- submit 버튼 클릭시 지정된  method 방식으로 지정된 action으로 전송 -->
+ <!-- qus/list => quest/create -->
+<form action="{{ url_for('QUESTION.question_create')}}" method="post">
+    <label>제목:<input type="text" name="subject"></label><br>
+    <label>내용:<textarea name="content" id="content" cols="22" rows="10"></textarea></label><br>
+    <input type="submit" value="등록">
+</form>
