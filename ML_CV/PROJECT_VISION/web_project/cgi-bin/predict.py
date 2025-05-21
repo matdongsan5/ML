@@ -298,7 +298,7 @@ print(f"""
         </div>
         <div class = 'sub_container'>
             <div class="image-container2">
-              <p p align='center'> 예상 도감번호 &nbsp[&nbsp{pre_[0]}&nbsp]  </p>  
+              <p p align='center'> 예상 도감번호 &nbsp[&nbsp{pre_}&nbsp]  </p>  
             </div>
             <div class="image-container2">
                 {pre_html}
